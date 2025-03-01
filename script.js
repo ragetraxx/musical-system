@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let movies = [];
 
-    // Fetch movies from movies.json
+    // Fetch movies.json instead of movie.txt
     fetch("movies.json")
         .then(response => response.json())
         .then(data => {
@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function playMovie(url) {
         videoPlayer.src = url;
-        playerContainer.classList.add("show");
+        playerContainer.style.display = "flex";
     }
 
     closePlayer.addEventListener("click", () => {
         videoPlayer.src = "";
-        playerContainer.classList.remove("show");
+        playerContainer.style.display = "none";
     });
 });
