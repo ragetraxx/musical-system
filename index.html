@@ -8,17 +8,20 @@
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Movie Streaming Logo" id="logo">
+        <img src="logo.png" id="logo" alt="Movie Logo">
         <h1>Movie Streaming</h1>
         <select id="categoryFilter">
             <option value="All">All Categories</option>
         </select>
     </header>
+
     <main id="movieContainer"></main>
-    <div id="playerContainer">
+
+    <div id="playerContainer" class="hidden">
         <video id="videoPlayer" controls autoplay></video>
         <button id="closePlayer">Close</button>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
