@@ -11,7 +11,7 @@ body {
 /* Header Styles */
 header {
     background-color: #1e1e1e;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +19,7 @@ header {
 
 /* Logo Styles */
 #logo {
-    max-width: 25px; /* Adjust size */
+    max-width: 80px; /* Smaller size */
     height: auto;
     display: block;
     margin-bottom: 10px;
@@ -27,9 +27,8 @@ header {
 
 /* Dropdown Filter */
 select {
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 10px;
+    padding: 8px;
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     background-color: #333;
@@ -39,8 +38,8 @@ select {
 /* Movie Grid Styles */
 #movieContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted column size */
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive */
+    gap: 10px;
     padding: 15px;
 }
 
@@ -61,10 +60,9 @@ select {
 }
 
 .movieThumbnail {
-    width: 25%;
-    height: auto;
-    max-height: 200px; /* Restrict height */
-    object-fit: cover; /* Maintain aspect ratio */
+    width: 100%;
+    height: 180px; /* Fixed height for uniformity */
+    object-fit: cover;
     border-radius: 8px;
 }
 
@@ -95,7 +93,7 @@ select {
     border-radius: 8px;
 }
 
-/* Close Button Styles */
+/* Close Button */
 #closePlayer {
     position: absolute;
     top: 20px;
@@ -103,9 +101,9 @@ select {
     background: red;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 5px;
 }
 
@@ -116,10 +114,10 @@ select {
     }
 
     .movieThumbnail {
-        max-height: 150px;
+        height: 150px;
     }
 
     #logo {
-        max-width: 120px;
+        max-width: 60px;
     }
 }
