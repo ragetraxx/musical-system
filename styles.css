@@ -14,12 +14,6 @@ header {
     padding: 20px;
 }
 
-/* Logo (Fixed Size with Margin) */
-logo {
-    width: 50px;
-    margin-right: 10px;
-}
-
 /* Category Dropdown */
 select {
     padding: 10px;
