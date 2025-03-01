@@ -8,30 +8,39 @@ body {
     text-align: center;
 }
 
-#logo {
-    max-width: 150px; /* Adjust size */
-    height: auto;
-    display: block;
-    margin: 0 auto 10px; /* Centering */
-}
-
 /* Header Styles */
 header {
     background-color: #1e1e1e;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* Logo Styles */
+#logo {
+    max-width: 150px; /* Adjust size */
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Dropdown Filter */
 select {
     padding: 10px;
     font-size: 16px;
     margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
 }
 
 /* Movie Grid Styles */
 #movieContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted column size */
-    gap: 15px; /* Reduced gap */
+    gap: 15px;
     padding: 15px;
 }
 
@@ -108,5 +117,9 @@ select {
 
     .movieThumbnail {
         max-height: 150px;
+    }
+
+    #logo {
+        max-width: 120px;
     }
 }
