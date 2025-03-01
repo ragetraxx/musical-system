@@ -17,7 +17,7 @@ header {
 /* Logo (Responsive Scaling) */
 #logo {
     width: 25vw; /* Adjusts dynamically */
-    max-width: 150px; /* Prevents excessive size */
+    max-width: 80px; /* Prevents excessive size */
     height: auto;
     display: block;
     margin: 10px auto;
