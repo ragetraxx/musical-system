@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,6 +8,7 @@ body {
     text-align: center;
 }
 
+/* Header Styles */
 header {
     background-color: #1e1e1e;
     padding: 20px;
@@ -18,6 +20,7 @@ select {
     margin-top: 10px;
 }
 
+/* Movie Grid Styles */
 #movieContainer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjusted column size */
@@ -25,6 +28,7 @@ select {
     padding: 15px;
 }
 
+/* Movie Item Styles */
 .movieItem {
     background-color: #333;
     padding: 8px;
@@ -48,6 +52,7 @@ select {
     border-radius: 8px;
 }
 
+/* Video Player Styles */
 #playerContainer {
     position: fixed;
     top: 0;
@@ -55,16 +60,26 @@ select {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+#playerContainer.show {
+    visibility: visible;
+    opacity: 1;
 }
 
 #videoPlayer {
     width: 80%;
     max-width: 800px;
+    border-radius: 8px;
 }
 
+/* Close Button Styles */
 #closePlayer {
     position: absolute;
     top: 20px;
@@ -74,4 +89,17 @@ select {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #movieContainer {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .movieThumbnail {
+        max-height: 150px;
+    }
 }
