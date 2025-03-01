@@ -14,13 +14,12 @@ header {
     padding: 20px;
 }
 
-/* Logo (Responsive Scaling) */
+/* Logo (Fixed Size with Margin) */
 #logo {
-    width: 25vw; /* Adjusts dynamically */
-    max-width: 80px; /* Prevents excessive size */
+    width: 50px;
+    margin-right: 10px;
     height: auto;
     display: block;
-    margin: 10px auto;
 }
 
 @media (max-width: 768px) {
