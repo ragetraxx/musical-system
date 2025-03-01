@@ -17,9 +17,10 @@ header {
     align-items: center;
 }
 
-/* Logo Styles */
+/* Logo Styles (Scales on different screen sizes) */
 #logo {
-    max-width: 80px; /* Smaller size */
+    width: 15vw; /* 15% of the viewport width */
+    max-width: 100px; /* Ensures it doesn’t grow too big */
     height: auto;
     display: block;
     margin-bottom: 10px;
@@ -35,15 +36,17 @@ select {
     color: white;
 }
 
-/* Movie Grid Styles */
+/* Movie Grid (Auto-Adjusts for all devices) */
 #movieContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Responsive columns */
     gap: 10px;
     padding: 15px;
+    max-width: 1200px; /* Prevents excessive stretching on large screens */
+    margin: auto;
 }
 
-/* Movie Item Styles */
+/* Movie Items */
 .movieItem {
     background-color: #333;
     padding: 8px;
@@ -59,14 +62,15 @@ select {
     transform: scale(1.05);
 }
 
+/* Movie Thumbnails (Ensures proper aspect ratio) */
 .movieThumbnail {
     width: 100%;
-    height: 180px; /* Fixed height for uniformity */
-    object-fit: cover;
+    height: 180px; /* Fixed height for uniform display */
+    object-fit: cover; /* Ensures images fit well */
     border-radius: 8px;
 }
 
-/* Video Player Styles */
+/* Video Player (Fits all screens) */
 #playerContainer {
     position: fixed;
     top: 0;
@@ -87,9 +91,10 @@ select {
     opacity: 1;
 }
 
+/* Video Element (Adapts to all screen sizes) */
 #videoPlayer {
-    width: 80%;
-    max-width: 800px;
+    width: 90vw; /* 90% of viewport width */
+    max-width: 800px; /* Prevents excessive stretching */
     border-radius: 8px;
 }
 
@@ -107,17 +112,48 @@ select {
     border-radius: 5px;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
+/* Mobile Optimization */
+@media (max-width: 768px) {
     #movieContainer {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller columns */
     }
 
     .movieThumbnail {
-        height: 150px;
+        height: 150px; /* Adjusted for smaller screens */
     }
 
     #logo {
-        max-width: 60px;
+        width: 20vw; /* Adjusts logo for mobile */
+        max-width: 80px;
+    }
+
+    select {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #videoPlayer {
+        width: 95vw; /* Full width for small screens */
+    }
+}
+
+/* Extra Small Screens (Phones under 500px width) */
+@media (max-width: 500px) {
+    #movieContainer {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for small screens */
+    }
+
+    .movieThumbnail {
+        height: 120px; /* Adjust thumbnail size */
+    }
+
+    #logo {
+        width: 25vw; /* Further scaling */
+        max-width: 70px;
+    }
+
+    #closePlayer {
+        padding: 8px 12px;
+        font-size: 12px;
     }
 }
