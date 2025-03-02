@@ -7,11 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let movies = [];
 
-    // Fetch movies.json and log errors if any
+    // Fetch movies.json
     fetch("./movies.json")
         .then(response => response.json())
         .then(data => {
-            console.log("Movies loaded:", data); // Debugging log
             movies = data;
             populateCategories(movies);
             displayMovies(movies);
@@ -49,12 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.playMovie = function(url) {
         videoPlayer.src = url;
-        playerContainer.classList.remove("hidden");
+        playerContainer.classList.add("active");
         videoPlayer.play();
     }
 
     closePlayer.addEventListener("click", () => {
-        playerContainer.classList.add("hidden");
+        playerContainer.classList.remove("active");
         videoPlayer.pause();
         videoPlayer.src = "";
     });
