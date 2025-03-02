@@ -29,54 +29,10 @@ select {
     padding: 20px;
 }
 
-/* Movie Item */
-.movieItem {
-    background-color: #333;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    text-align: center;
-}
-
-.movieItem:hover {
-    transform: scale(1.05);
-}
-
-/* Movie Thumbnails */
-.movieThumbnail {
-    width: 100%;
+/* Adjust logo size and center it */
+#logo {
+    display: block;
+    max-width: 200px; /* Adjust size as needed */
     height: auto;
-    max-height: 200px; /* Prevents too large images */
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-/* Video Player */
-#playerContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-#videoPlayer {
-    width: 80%;
-    max-width: 800px;
-}
-
-#closePlayer {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+    margin: 20px auto; /* Centers the logo */
 }
