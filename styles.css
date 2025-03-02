@@ -32,7 +32,21 @@ select {
 /* Adjust logo size and center it */
 #logo {
     display: block;
-    max-width: 200px; /* Adjust size as needed */
+    max-width: 200px;
     height: auto;
-    margin: 20px auto; /* Centers the logo */
+    margin: 20px auto;
+}
+
+/* Movie Items */
+.movie-item {
+    background-color: #282828;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.movie-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
