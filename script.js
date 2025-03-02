@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const movieElement = document.createElement("div");
             movieElement.classList.add("movie-item");
             movieElement.innerHTML = `
-                <img src="${movie.image}" alt="${movie.title}" class="movie-img">
+                <img src="${movie.image}" alt="${movie.title}" class="movie-img" onclick="playMovie('${movie.url}')">
                 <h3>${movie.title}</h3>
                 <button onclick="playMovie('${movie.url}')">Watch</button>
             `;
@@ -47,13 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function playMovie(url) {
+    window.playMovie = function(url) {
         videoPlayer.src = url;
         playerContainer.classList.remove("hidden");
+        videoPlayer.play();
     }
 
     closePlayer.addEventListener("click", () => {
         playerContainer.classList.add("hidden");
+        videoPlayer.pause();
         videoPlayer.src = "";
     });
 
