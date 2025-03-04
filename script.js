@@ -46,6 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function searchMovies() {
+    let input = document.getElementById("searchBar").value.toLowerCase();
+    let movies = document.querySelectorAll("#movieList li");
+
+    movies.forEach(movie => {
+        let title = movie.textContent.toLowerCase();
+        movie.style.display = title.includes(input) ? "block" : "none";
+    });
+    }
+
     window.playMovie = function(url) {
         videoPlayer.src = url;
         playerContainer.classList.add("active");
