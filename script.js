@@ -12,27 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             movies = data;
-            displayMovies(movies);
             populateCategories(movies);
-        });
-
-    function displayMovies(movies) {
-        movieContainer.innerHTML = "";
-        movies.forEach(movie => {
-            const movieItem = document.createElement("div");
-            movieItem.classList.add("movie-item");
-            movieItem.innerHTML = `
-                <img src="${movie.image}" alt="${movie.title}" class="movie-image">
-                <h3 class="movie-title">${movie.title}</h3>
-                <button onclick="playMovie('${movie.url}')">Play</button>
-            `;
-            movieContainer.appendChild(movieItem);
-        });
-    }
+            displayMovies(movies);
+        })
+        .catch(error => console.error("Error loading movies:", error));
 
     function populateCategories(movies) {
-        const categories = [...new Set(movies.map(movie => movie.category))];
-        categoryFilter.innerHTML = `<option value="all">All</option>`;
+        const categories = new Set(["All"]); // Default category "All"
+        movies.forEach(movie => categories.add(movie.category));
+        
+        categoryFilter.innerHTML = ""; // Clear existing options
+
         categories.forEach(category => {
             const option = document.createElement("option");
             option.value = category;
@@ -41,42 +31,41 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    categoryFilter.addEventListener("change", () => {
-        const selectedCategory = categoryFilter.value;
-        const filteredMovies = selectedCategory === "all" 
-            ? movies 
-            : movies.filter(movie => movie.category === selectedCategory);
-        displayMovies(filteredMovies);
-    });
+    function displayMovies(filteredMovies) {
+        movieContainer.innerHTML = ""; // Clear previous content
+
+        filteredMovies.forEach(movie => {
+            const movieElement = document.createElement("div");
+            movieElement.classList.add("movie-item");
+            movieElement.innerHTML = `
+                <img src="${movie.image}" alt="${movie.title}" class="movie-img" onclick="playMovie('${movie.url}')">
+                <h3>${movie.title}</h3>
+                <button onclick="playMovie('${movie.url}')">Watch</button>
+            `;
+            movieContainer.appendChild(movieElement);
+        });
+    }
+
+    window.playMovie = function(url) {
+        videoPlayer.src = url;
+        playerContainer.classList.add("active");
+        videoPlayer.play();
+    }
 
     closePlayer.addEventListener("click", () => {
-        playerContainer.classList.add("hidden");
+        playerContainer.classList.remove("active");
         videoPlayer.pause();
-        videoPlayer.src = ""; // Stop and reset video source
+        videoPlayer.src = "";
+    });
+
+    // Filter movies when category changes
+    categoryFilter.addEventListener("change", () => {
+        const selectedCategory = categoryFilter.value;
+        if (selectedCategory === "All") {
+            displayMovies(movies);
+        } else {
+            const filteredMovies = movies.filter(movie => movie.category === selectedCategory);
+            displayMovies(filteredMovies);
+        }
     });
 });
-
-// Fixed playMovie function with debugging
-function playMovie(url) {
-    const playerContainer = document.getElementById("playerContainer");
-    const videoPlayer = document.getElementById("videoPlayer");
-
-    console.log("Playing movie:", url); // Debugging: Check if URL is valid
-
-    videoPlayer.src = url;
-    videoPlayer.load(); // Ensure the new source is loaded
-    videoPlayer.play(); // Start playing the movie
-
-    playerContainer.classList.remove("hidden"); // Show the player
-}
-
-// Search function
-function searchMovies() {
-    let input = document.getElementById("searchBar").value.toLowerCase();
-    let movies = document.querySelectorAll("#movieContainer .movie-item");
-
-    movies.forEach(movie => {
-        let title = movie.querySelector(".movie-title").textContent.toLowerCase();
-        movie.style.display = title.includes(input) ? "block" : "none";
-    });
-}
