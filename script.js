@@ -46,15 +46,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function searchMovies() {
+    // Search function
+function searchMovies() {
     let input = document.getElementById("searchBar").value.toLowerCase();
-    let movies = document.querySelectorAll("#movieList li");
+    let movies = document.querySelectorAll("#movieContainer .movie-item");
 
     movies.forEach(movie => {
-        let title = movie.textContent.toLowerCase();
+        let title = movie.querySelector(".movie-title").textContent.toLowerCase();
         movie.style.display = title.includes(input) ? "block" : "none";
     });
-    }
+}
+
 
     window.playMovie = function(url) {
         videoPlayer.src = url;
