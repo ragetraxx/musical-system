@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Library</title>
-    <link rel="stylesheet" href="styles.css">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6729071183746449" crossorigin="anonymous"></script>
-    <!-- AMP Auto Ads -->
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-6729071183746449"></amp-auto-ads>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Film Library</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-    <header>
-        <img id="logo" src="logo.png" alt="Website Logo">
-        <h1>Film Library</h1>
-        <select id="categoryFilter"></select>
-    </header>
-
-    <!-- Search Bar -->
-    <input type="text" id="searchBar" placeholder="Search movies..." onkeyup="searchMovies()">
-
-    <div id="movieContainer"></div>
-
-    <div id="playerContainer" class="hidden">
-        <video id="videoPlayer" controls></video>
-        <button id="closePlayer">Close</button>
+  <header>
+    <div class="header-content">
+      <img id="logo" src="logo.png" alt="Logo" />
+      <h1>Film Library</h1>
+      <input type="text" id="searchBar" placeholder="Search movies..." onkeyup="searchMovies()" />
+      <select id="categoryFilter"></select>
     </div>
+  </header>
 
-    <script src="script.js"></script>
+  <main>
+    <section id="movieContainer"></section>
+  </main>
+
+  <div id="playerContainer">
+    <div class="player-overlay">
+      <video id="videoPlayer" controls autoplay></video>
+      <button id="closePlayer">×</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
