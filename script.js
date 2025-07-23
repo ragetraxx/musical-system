@@ -70,9 +70,19 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.playMovie = function (url) {
-    videoPlayer.src = url;
     playerContainer.classList.add("active");
-    videoPlayer.play();
+
+    if (Hls.isSupported() && url.endsWith(".m3u8")) {
+      const hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(videoPlayer);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        videoPlayer.play();
+      });
+    } else {
+      videoPlayer.src = url;
+      videoPlayer.play();
+    }
   };
 
   closePlayer.addEventListener("click", () => {
