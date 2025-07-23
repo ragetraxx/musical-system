@@ -22,11 +22,13 @@
 
   <div id="playerContainer">
     <div class="player-overlay">
-      <video id="videoPlayer" controls autoplay></video>
+      <video id="videoPlayer" controls autoplay muted></video>
       <button id="closePlayer">×</button>
     </div>
   </div>
 
+  <!-- HLS.js support for .m3u8 playback -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="script.js"></script>
 </body>
 </html>
