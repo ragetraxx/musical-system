@@ -1,5 +1,3 @@
-// script.js
-
 function buildEmbedUrl(type, id) {
   const base = 'https://vidsrc.xyz/embed/movie';
   const url = new URL(base);
@@ -23,12 +21,10 @@ document.getElementById('load-btn').addEventListener('click', () => {
     return;
   }
 
-  const iframe = document.getElementById('movie-player');
-  iframe.src = buildEmbedUrl(type, id);
+  document.getElementById('movie-player').src = buildEmbedUrl(type, id);
 });
 
 // ----------------- Latest Movies -----------------
-
 let currentPage = 1;
 const latestContainer = document.getElementById('latest-movies');
 const pageNumberDisplay = document.getElementById('page-number');
@@ -45,7 +41,9 @@ async function fetchLatestMovies(page) {
       card.className = 'movie-card';
 
       const img = document.createElement('img');
-      img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      img.src = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : 'https://via.placeholder.com/300x450?text=No+Image';
       img.alt = movie.title;
 
       const title = document.createElement('div');
@@ -56,8 +54,7 @@ async function fetchLatestMovies(page) {
       card.appendChild(title);
 
       card.addEventListener('click', () => {
-        const iframe = document.getElementById('movie-player');
-        iframe.src = buildEmbedUrl('tmdb', movie.id);
+        document.getElementById('movie-player').src = buildEmbedUrl('tmdb', movie.id);
       });
 
       latestContainer.appendChild(card);
@@ -78,7 +75,7 @@ document.getElementById('prev-page').addEventListener('click', () => {
 
 document.getElementById('next-page').addEventListener('click', () => {
   currentPage++;
-  fetchLatestMovies(currentPage);
+    fetchLatestMovies(currentPage);
 });
 
 // Initial load
