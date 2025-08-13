@@ -13,31 +13,41 @@ body {
   min-height: 100vh;
 }
 
+/* HEADER */
 header {
   background-color: #1f1f1f;
-  padding: 20px;
+  padding: 15px 20px;
   text-align: center;
 }
 
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logo {
-  height: 60px;
-  display: block;
-  margin: 0 auto 10px;
+  height: 50px;
+  max-width: 150px;
+  margin-bottom: 5px;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
+/* MAIN CONTENT */
 main {
   flex: 1;
   padding: 20px;
 }
 
+/* SEARCH / INPUT */
 .input-area {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   margin-bottom: 20px;
 }
 
@@ -45,46 +55,71 @@ main {
 .input-area input,
 .input-area button {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 4px;
 }
 
+.input-area input {
+  min-width: 200px;
+}
+
+.input-area button {
+  background-color: #e50914;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-area button:hover {
+  background-color: #ff1e2b;
+}
+
+/* PLAYER */
 #player-container {
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-bottom: 30px;
 }
 
 #player-container iframe {
   width: 100%;
-  max-width: 800px;
+  max-width: 900px;
   aspect-ratio: 16 / 9;
   border: none;
+  border-radius: 6px;
 }
 
+/* LATEST MOVIES */
 #latest-section {
   margin-top: 20px;
 }
 
 #latest-section h2 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .page-control {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.page-control button {
-  padding: 5px 12px;
+.nav-btn {
+  padding: 6px 14px;
   background-color: #333;
   border: none;
   color: #fff;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.nav-btn:hover {
+  background-color: #555;
 }
 
 .movies-grid {
@@ -96,14 +131,27 @@ main {
 .movie-card {
   cursor: pointer;
   text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
 }
 
 .movie-card img {
   width: 100%;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .movie-title {
   font-size: 0.85rem;
   margin-top: 5px;
+}
+
+/* FOOTER */
+footer {
+  background-color: #1f1f1f;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
 }
