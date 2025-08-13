@@ -8,8 +8,10 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Rage Movie Logo" class="logo" />
-    <h1>Rage Movie</h1>
+    <div class="logo-container">
+      <img src="logo.png" alt="Rage Movie Logo" class="logo" />
+      <h1>Rage Movie</h1>
+    </div>
   </header>
 
   <main>
@@ -35,9 +37,9 @@
     <section id="latest-section">
       <h2>Latest Movies</h2>
       <div class="page-control">
-        <button id="prev-page">Prev</button>
+        <button id="prev-page" class="nav-btn">⬅ Prev</button>
         <span id="page-number">1</span>
-        <button id="next-page">Next</button>
+        <button id="next-page" class="nav-btn">Next ➡</button>
       </div>
       <div id="latest-movies" class="movies-grid"></div>
     </section>
