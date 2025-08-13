@@ -1,78 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rage Movie</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://image.tmdb.org" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Library</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="brand">
-      <img src="logo.png" alt="Rage Movie" class="logo" />
-      <span class="brand-name">Rage Movie</span>
+
+    <header>
+        <img id="logo" src="logo.png" alt="Website Logo">
+        <h1>Film Library</h1>
+        <select id="categoryFilter"></select>
+    </header>
+
+        <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search movies..." onkeyup="searchMovies()">
+
+    <div id="movieContainer"></div>
+
+    <div id="playerContainer" class="hidden">
+        <video id="videoPlayer" controls></video>
+        <button id="closePlayer">Close</button>
     </div>
 
-    <div class="actions">
-      <div class="id-loader">
-        <select id="id-type" aria-label="ID Type">
-          <option value="tmdb">TMDb</option>
-          <option value="imdb">IMDb</option>
-        </select>
-        <input id="movie-id" type="text" placeholder="Enter TMDb or IMDb ID…" />
-        <input id="lang" type="text" placeholder="Subs lang (e.g. en, de)" />
-        <input id="sub-url" type="url" placeholder="Subtitle URL (optional)" />
-        <button id="load-btn" class="btn primary">Play</button>
-      </div>
-
-      <div class="search">
-        <input id="search-input" type="search" placeholder="Search in page…" />
-      </div>
-    </div>
-  </header>
-
-  <!-- Player -->
-  <section id="player-wrap" class="player-wrap hidden">
-    <div class="player-header">
-      <h2 id="now-playing">Now Playing</h2>
-      <button id="close-player" class="btn subtle">Close</button>
-    </div>
-    <div class="player">
-      <iframe id="movie-player" title="Movie Player" allow="autoplay; fullscreen" loading="lazy"></iframe>
-    </div>
-  </section>
-
-  <!-- Catalog -->
-  <main>
-    <div class="section-head">
-      <h2>Latest Movies</h2>
-      <div class="pager">
-        <button id="prev-page" class="btn subtle" aria-label="Previous page">‹</button>
-        <span id="page-number" class="page-pill">1</span>
-        <button id="next-page" class="btn subtle" aria-label="Next page">›</button>
-      </div>
-    </div>
-
-    <div id="grid" class="grid"></div>
-
-    <div id="status" class="status"></div>
-  </main>
-
-  <!-- Details Drawer -->
-  <aside id="drawer" class="drawer">
-    <button class="drawer-close" id="drawer-close" aria-label="Close details">×</button>
-    <div id="drawer-content"></div>
-  </aside>
-
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-  <footer class="footer">
-    <p>Data: VidSrc latest feed • Posters: TMDb images</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
