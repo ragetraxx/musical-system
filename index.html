@@ -2,33 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Film Library</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rage Movie</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <img id="logo" src="logo.png" alt="Logo" />
-      <h1>Film Library</h1>
-      <input type="text" id="searchBar" placeholder="Search movies..." onkeyup="searchMovies()" />
-      <select id="categoryFilter"></select>
-    </div>
+    <img src="logo.png" alt="Rage Movie Logo" class="logo" />
+    <h1>Rage Movie</h1>
   </header>
 
   <main>
-    <section id="movieContainer"></section>
+    <div class="input-area">
+      <select id="id-type">
+        <option value="imdb">IMDb ID</option>
+        <option value="tmdb">TMDb ID</option>
+      </select>
+      <input type="text" id="movie-id" placeholder="Enter IMDb or TMDb ID" />
+      <button id="load-btn">Load Movie</button>
+    </div>
+
+    <div id="player-container">
+      <iframe
+        id="movie-player"
+        src=""
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; fullscreen"
+      ></iframe>
+    </div>
+
+    <section id="latest-section">
+      <h2>Latest Movies</h2>
+      <div class="page-control">
+        <button id="prev-page">Prev</button>
+        <span id="page-number">1</span>
+        <button id="next-page">Next</button>
+      </div>
+      <div id="latest-movies" class="movies-grid"></div>
+    </section>
   </main>
 
-  <div id="playerContainer">
-    <div class="player-overlay">
-      <video id="videoPlayer" controls autoplay muted></video>
-      <button id="closePlayer">×</button>
-    </div>
-  </div>
+  <footer>
+    <p>Powered by VidSrc</p>
+  </footer>
 
-  <!-- HLS.js support for .m3u8 playback -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="script.js"></script>
 </body>
 </html>
