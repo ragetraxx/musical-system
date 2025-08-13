@@ -1,93 +1,85 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const movieContainer = document.getElementById("movieContainer");
-  const categoryFilter = document.getElementById("categoryFilter");
-  const videoPlayer = document.getElementById("videoPlayer");
-  const playerContainer = document.getElementById("playerContainer");
-  const closePlayer = document.getElementById("closePlayer");
+// script.js
 
-  let movies = [];
+function buildEmbedUrl(type, id) {
+  const base = 'https://vidsrc.xyz/embed/movie';
+  const url = new URL(base);
 
-  fetch("movies.json")
-    .then((response) => response.json())
-    .then((data) => {
-      movies = data;
-      populateCategories(movies);
-      displayMovies(movies);
-    })
-    .catch((error) => console.error("Error loading movies:", error));
-
-  function populateCategories(movies) {
-    const categories = new Set(["All"]);
-    movies.forEach((movie) => categories.add(movie.category));
-    categoryFilter.innerHTML = "";
-    categories.forEach((category) => {
-      const option = document.createElement("option");
-      option.value = category;
-      option.textContent = category;
-      categoryFilter.appendChild(option);
-    });
+  if (type === 'imdb') {
+    url.searchParams.set('imdb', id);
+  } else if (type === 'tmdb') {
+    url.searchParams.set('tmdb', id);
   }
 
-  function displayMovies(movieList) {
-    movieContainer.innerHTML = "";
-    movieList.forEach((movie) => {
-      const movieItem = document.createElement("div");
-      movieItem.classList.add("movie-item");
+  url.searchParams.set('autoplay', '1');
+  return url.toString();
+}
 
-      const img = document.createElement("img");
-      img.src = movie.image;
-      img.alt = movie.title;
-      img.classList.add("movie-img");
-      img.addEventListener("click", () => playMovie(movie.url));
+document.getElementById('load-btn').addEventListener('click', () => {
+  const type = document.getElementById('id-type').value;
+  const id = document.getElementById('movie-id').value.trim();
 
-      const title = document.createElement("div");
-      title.textContent = movie.title;
-      title.classList.add("movie-title");
-
-      movieItem.appendChild(img);
-      movieItem.appendChild(title);
-      movieContainer.appendChild(movieItem);
-    });
+  if (!id) {
+    alert('Please enter a valid ID.');
+    return;
   }
 
-  categoryFilter.addEventListener("change", () => {
-    const selected = categoryFilter.value;
-    if (selected === "All") {
-      displayMovies(movies);
-    } else {
-      const filtered = movies.filter((m) => m.category === selected);
-      displayMovies(filtered);
-    }
-  });
-
-  window.searchMovies = function () {
-    const query = document.getElementById("searchBar").value.toLowerCase();
-    const items = document.querySelectorAll(".movie-item");
-    items.forEach((item) => {
-      const title = item.querySelector(".movie-title")?.textContent.toLowerCase() || "";
-      item.style.display = title.includes(query) ? "block" : "none";
-    });
-  };
-
-  window.playMovie = function (url) {
-    playerContainer.classList.add("active");
-
-    if (Hls.isSupported() && url.endsWith(".m3u8")) {
-      const hls = new Hls();
-      hls.loadSource(url);
-      hls.attachMedia(videoPlayer);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        videoPlayer.play();
-      });
-    } else {
-      videoPlayer.src = url;
-      videoPlayer.play();
-    }
-  };
-
-  closePlayer.addEventListener("click", () => {
-    playerContainer.classList.remove("active");
-    videoPlayer.pause();
-    videoPlayer.src = "";
-  });
+  const iframe = document.getElementById('movie-player');
+  iframe.src = buildEmbedUrl(type, id);
 });
+
+// ----------------- Latest Movies -----------------
+
+let currentPage = 1;
+const latestContainer = document.getElementById('latest-movies');
+const pageNumberDisplay = document.getElementById('page-number');
+
+async function fetchLatestMovies(page) {
+  try {
+    const res = await fetch(`https://vidsrc.xyz/movies/latest/page-${page}.json`);
+    const data = await res.json();
+
+    latestContainer.innerHTML = '';
+
+    data.result.forEach(movie => {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
+
+      const img = document.createElement('img');
+      img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      img.alt = movie.title;
+
+      const title = document.createElement('div');
+      title.className = 'movie-title';
+      title.textContent = movie.title;
+
+      card.appendChild(img);
+      card.appendChild(title);
+
+      card.addEventListener('click', () => {
+        const iframe = document.getElementById('movie-player');
+        iframe.src = buildEmbedUrl('tmdb', movie.id);
+      });
+
+      latestContainer.appendChild(card);
+    });
+
+    pageNumberDisplay.textContent = page;
+  } catch (err) {
+    console.error('Error fetching latest movies:', err);
+  }
+}
+
+document.getElementById('prev-page').addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    fetchLatestMovies(currentPage);
+  }
+});
+
+document.getElementById('next-page').addEventListener('click', () => {
+  currentPage++;
+  fetchLatestMovies(currentPage);
+});
+
+// Initial load
+fetchLatestMovies(currentPage);
