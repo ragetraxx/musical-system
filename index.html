@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Library</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Rage Movie</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <!-- Header -->
     <header>
-        <img id="logo" src="logo.png" alt="Website Logo">
-        <h1>Film Library</h1>
-        <select id="categoryFilter"></select>
+        <img src="logo.png" alt="Rage Movie Logo" class="logo">
     </header>
 
-        <!-- Search Bar -->
-    <input type="text" id="searchBar" placeholder="Search movies..." onkeyup="searchMovies()">
+    <!-- Movie Rows -->
+    <main id="movie-container">
+        <!-- Movies will be loaded here -->
+    </main>
 
-    <div id="movieContainer"></div>
-
-    <div id="playerContainer" class="hidden">
-        <video id="videoPlayer" controls></video>
-        <button id="closePlayer">Close</button>
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <span id="closeModal">&times;</span>
+        <iframe id="videoPlayer" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <script src="script.js"></script>
