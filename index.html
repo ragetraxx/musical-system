@@ -9,19 +9,20 @@
 <body>
     <!-- Header -->
     <header>
-        <img src="logo.png" alt="Rage Movie Logo" class="logo">
+        <div class="logo-title">
+            <img src="logo.png" alt="Rage Movie Logo" class="logo">
+            <h1 class="site-title">Rage Movie</h1>
+        </div>
+        <input type="text" id="searchBar" placeholder="Search movies...">
     </header>
 
-    <!-- Movie Rows -->
-    <main id="movie-container">
-        <!-- Movies will be loaded here -->
-    </main>
+    <!-- Player -->
+    <section id="player-section">
+        <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+    </section>
 
-    <!-- Video Modal -->
-    <div id="videoModal" class="modal">
-        <span id="closeModal">&times;</span>
-        <iframe id="videoPlayer" frameborder="0" allowfullscreen></iframe>
-    </div>
+    <!-- Movie Rows -->
+    <main id="movie-container"></main>
 
     <script src="script.js"></script>
 </body>
