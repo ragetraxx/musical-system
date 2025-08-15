@@ -1,83 +1,62 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const movieContainer = document.getElementById("movieContainer");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const playerContainer = document.getElementById("playerContainer");
+    const movieContainer = document.getElementById("movie-container");
+    const modal = document.getElementById("videoModal");
+    const closeModal = document.getElementById("closeModal");
     const videoPlayer = document.getElementById("videoPlayer");
-    const closePlayer = document.getElementById("closePlayer");
 
-    let movies = [];
-
-    // Fetch movies.json
-    fetch("./movies.json")
-        .then(response => response.json())
+    fetch("movie.json")
+        .then(res => res.json())
         .then(data => {
-            movies = data;
-            populateCategories(movies);
-            displayMovies(movies);
-        })
-        .catch(error => console.error("Error loading movies:", error));
+            const categories = {};
 
-    function populateCategories(movies) {
-        const categories = new Set(["All"]); // Default category "All"
-        movies.forEach(movie => categories.add(movie.category));
-        
-        categoryFilter.innerHTML = ""; // Clear existing options
+            // Group by category
+            data.forEach(movie => {
+                if (!categories[movie.category]) {
+                    categories[movie.category] = [];
+                }
+                categories[movie.category].push(movie);
+            });
 
-        categories.forEach(category => {
-            const option = document.createElement("option");
-            option.value = category;
-            option.textContent = category;
-            categoryFilter.appendChild(option);
+            // Create rows
+            for (let category in categories) {
+                const categoryTitle = document.createElement("h2");
+                categoryTitle.className = "category-title";
+                categoryTitle.textContent = category;
+                movieContainer.appendChild(categoryTitle);
+
+                const row = document.createElement("div");
+                row.className = "movie-row";
+
+                categories[category].forEach(movie => {
+                    const card = document.createElement("div");
+                    card.className = "movie-card";
+                    card.innerHTML = `<img src="${movie.image}" alt="${movie.title}" title="${movie.title}">`;
+                    
+                    card.addEventListener("click", () => {
+                        const match = movie.url.match(/streamsvr\/([^/]+)/);
+                        if (match && match[1]) {
+                            videoPlayer.src = `https://pkaystream.cc/embed/${match[1]}`;
+                            modal.style.display = "block";
+                        }
+                    });
+
+                    row.appendChild(card);
+                });
+
+                movieContainer.appendChild(row);
+            }
         });
-    }
 
-    function displayMovies(filteredMovies) {
-        movieContainer.innerHTML = ""; // Clear previous content
-
-        filteredMovies.forEach(movie => {
-            const movieElement = document.createElement("div");
-            movieElement.classList.add("movie-item");
-            movieElement.innerHTML = `
-                <img src="${movie.image}" alt="${movie.title}" class="movie-img" onclick="playMovie('${movie.url}')">
-                <h3>${movie.title}</h3>
-                <button onclick="playMovie('${movie.url}')">Watch</button>
-            `;
-            movieContainer.appendChild(movieElement);
-        });
-    }
-
-    // Search function
-function searchMovies() {
-    let input = document.getElementById("searchBar").value.toLowerCase();
-    let movies = document.querySelectorAll("#movieContainer .movie-item");
-
-    movies.forEach(movie => {
-        let title = movie.querySelector(".movie-title").textContent.toLowerCase();
-        movie.style.display = title.includes(input) ? "block" : "none";
-    });
-}
-
-
-    window.playMovie = function(url) {
-        videoPlayer.src = url;
-        playerContainer.classList.add("active");
-        videoPlayer.play();
-    }
-
-    closePlayer.addEventListener("click", () => {
-        playerContainer.classList.remove("active");
-        videoPlayer.pause();
+    // Close modal
+    closeModal.addEventListener("click", () => {
+        modal.style.display = "none";
         videoPlayer.src = "";
     });
 
-    // Filter movies when category changes
-    categoryFilter.addEventListener("change", () => {
-        const selectedCategory = categoryFilter.value;
-        if (selectedCategory === "All") {
-            displayMovies(movies);
-        } else {
-            const filteredMovies = movies.filter(movie => movie.category === selectedCategory);
-            displayMovies(filteredMovies);
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            videoPlayer.src = "";
         }
     });
 });
