@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModal = document.getElementById("closeModal");
     const videoPlayer = document.getElementById("videoPlayer");
 
-    fetch("movie.json")
+    fetch("movies.json")
         .then(res => res.json())
         .then(data => {
             const categories = {};
