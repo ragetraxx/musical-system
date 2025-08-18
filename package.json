@@ -1,0 +1,11 @@
+{
+  "name": "rage-tube",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo \"Static front-end\"",
+    "start": "vercel dev"
+  },
+  "devDependencies": {}
+}
