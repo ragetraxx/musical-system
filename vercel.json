@@ -1,8 +1,8 @@
 {
-  "version": 3,
+  "version": 2,
   "routes": [
-    { "src": "/api/proxy", "dest": "api/proxy.js" },
-    { "src": "/api/tmdb", "dest": "api/tmdb.js" },
-    { "src": "/(.*)", "dest": "/" }
+    { "src": "/api/proxy", "dest": "/api/proxy.js" },
+    { "src": "/api/tmdb", "dest": "/api/tmdb.js" },
+    { "src": "/.*", "dest": "/" }
   ]
 }
