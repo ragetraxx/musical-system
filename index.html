@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rage Movie</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RageTube</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo-title">
-            <img src="logo.png" alt="Rage Movie Logo" class="logo">
-            <h1 class="site-title">Rage Movie</h1>
-        </div>
-        <input type="text" id="searchBar" placeholder="Search movies...">
-    </header>
+  <!-- Top Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <img src="logo.png" alt="RageTube Logo" class="logo"/>
+      <h1 class="site-title">RageTube</h1>
+    </div>
+    <div class="navbar-center">
+      <input type="text" id="searchBar" placeholder="Search"/>
+    </div>
+    <div class="navbar-right">
+      <div class="profile-placeholder">👤</div>
+    </div>
+  </header>
 
-    <!-- Player -->
-    <section id="player-section">
-        <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
-    </section>
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Video Player Area -->
+    <div class="player-section">
+      <video id="videoPlayer" controls autoplay></video>
+      <h2 id="videoTitle"></h2>
+      <p id="videoCategory"></p>
+    </div>
 
-    <!-- Movie Rows -->
-    <main id="movie-container"></main>
+    <!-- Sidebar Recommendations -->
+    <aside class="sidebar" id="movie-container"></aside>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
