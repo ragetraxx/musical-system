@@ -1,20 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const movieContainer = document.getElementById("movie-container");
-  const videoPlayer = document.getElementById("videoPlayer");
   const videoTitle = document.getElementById("videoTitle");
   const videoDescription = document.getElementById("videoDescription");
   const searchBar = document.getElementById("searchBar");
 
   let allMovies = [];
+  let player; // JW Player instance
 
+  // ✅ Load movie.json
   fetch("movie.json")
     .then(res => res.json())
     .then(data => {
       allMovies = data;
       renderMovies(allMovies);
-      if (allMovies.length > 0) loadMovie(allMovies[0]);
+      if (allMovies.length > 0) loadMovie(allMovies[0]); // autoplay first movie
     });
 
+  // ✅ Render Sidebar
   function renderMovies(movies, searchTerm = "") {
     movieContainer.innerHTML = "";
     movies.forEach(movie => {
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ✅ Get description from TMDB API relay
   async function fetchDescription(title) {
     try {
       const r = await fetch(`/api/tmdb?query=${encodeURIComponent(title)}`);
@@ -51,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ✅ Load into JW Player
   async function loadMovie(movie) {
     videoTitle.textContent = movie.title;
     videoDescription.textContent = "Loading description...";
@@ -58,22 +62,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const proxied = `/api/proxy?url=${encodeURIComponent(movie.url)}`;
 
-    // HLS
-    if (movie.url.toLowerCase().includes(".m3u8") && window.Hls && Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(proxied);
-      hls.attachMedia(videoPlayer);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => videoPlayer.play());
-      hls.on(Hls.Events.ERROR, (e, data) => console.error("HLS error:", data));
-      return;
+    if (!player) {
+      // Initialize JW Player once
+      player = jwplayer("videoPlayer").setup({
+        file: proxied,
+        image: movie.image || "",
+        width: "100%",
+        aspectratio: "16:9",
+        autostart: true,
+        controls: true
+      });
+    } else {
+      // Load new movie
+      player.load([{
+        file: proxied,
+        image: movie.image || ""
+      }]);
+      player.play();
     }
-
-    // MP4/MKV/others via proxy
-    videoPlayer.src = proxied;
-    videoPlayer.play().catch(() => {/* autoplay block */});
   }
 
-  // Search
+  // ✅ Search
   searchBar.addEventListener("input", (e) => {
     const q = e.target.value.toLowerCase();
     const filtered = allMovies.filter(m => m.title.toLowerCase().includes(q));
