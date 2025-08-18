@@ -1,9 +1,9 @@
-/* Base */
 body {
   margin: 0;
-  font-family: Roboto, Arial, sans-serif;
-  background-color: #0f0f0f;
-  color: #fff;
+  font-family: Arial, sans-serif;
+  background-color: #181818;
+  color: white;
+  overflow: hidden; /* prevent full page scroll */
 }
 
 /* Navbar */
@@ -11,18 +11,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0f0f0f;
+  background: #202020;
   padding: 8px 12px;
   position: sticky;
   top: 0;
-  z-index: 100;
-  border-bottom: 1px solid #222;
+  z-index: 200;
 }
 
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 .logo {
   height: 28px;
@@ -33,62 +32,76 @@ body {
 }
 
 .navbar-center input {
-  display: none; /* Hidden on mobile by default */
+  width: 60vw;
+  max-width: 400px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  background: #121212;
+  color: white;
+  font-size: 0.9em;
 }
 
 .navbar-right .profile-placeholder {
-  background: #333;
+  background: #444;
   border-radius: 50%;
-  padding: 6px;
-  font-size: 1em;
+  padding: 8px;
+  font-size: 1.1em;
 }
 
-/* Content layout: mobile-first */
-.content {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 60px; /* space for safe area */
-}
-
-/* Player Section */
+/* Fixed Player */
 .player-section {
-  width: 100%;
+  position: fixed;
+  top: 48px; /* height of navbar */
+  left: 0;
+  right: 0;
+  background: #181818;
+  z-index: 150;
+  padding: 8px 12px 12px;
+  border-bottom: 1px solid #333;
 }
 #videoPlayer {
   width: 100%;
-  aspect-ratio: 16/9;
+  max-height: 50vh;
   background: black;
 }
 #videoTitle {
-  margin: 10px 12px 4px;
+  margin: 10px 0 4px;
   font-size: 1.1em;
-  font-weight: 500;
+  font-weight: bold;
 }
 #videoDescription {
-  margin: 0 12px 12px;
-  font-size: 0.9em;
-  color: #aaa;
+  font-size: 0.95em;
+  color: #ccc;
   line-height: 1.4;
+  margin-top: 6px;
 }
 
-/* Recommendations (like YouTube mobile feed) */
-.sidebar {
+/* Scrollable Recommendations */
+.recommendations {
+  position: absolute;
+  top: calc(50vh + 140px); /* account for video height + title/desc */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 8px 12px;
+  padding: 12px;
 }
 
 .movie-card {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
 }
 .movie-card img {
   width: 160px;
   height: 90px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 .movie-info {
   display: flex;
@@ -96,31 +109,33 @@ body {
   justify-content: center;
 }
 .movie-title {
-  font-size: 0.95em;
-  font-weight: 500;
+  font-size: 0.9em;
+  font-weight: bold;
   margin-bottom: 4px;
-  color: #fff;
 }
 .movie-category {
   font-size: 0.8em;
   color: #aaa;
 }
+
 .highlight {
   background: yellow;
   color: black;
 }
 
-/* Responsive search for wider screens */
-@media (min-width: 768px) {
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #videoPlayer {
+    max-height: 40vh;
+  }
+  .recommendations {
+    top: calc(40vh + 120px);
+  }
+  .movie-card img {
+    width: 120px;
+    height: 68px;
+  }
   .navbar-center input {
-    display: block;
-    width: 400px;
-    max-width: 60vw;
-    padding: 6px 10px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
-    background: #222;
-    color: white;
+    width: 50vw;
   }
 }
