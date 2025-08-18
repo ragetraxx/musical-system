@@ -4,8 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RageTube</title>
+
+  <!-- JW Player Core + Plugins -->
+  <script src="https://ssl.p.jwpcdn.com/player/v/8.28.1/jwplayer.js"></script>
+  <script src="https://ssl.p.jwpcdn.com/player/v/8.28.1/provider.hlsjs.js"></script>
+  <script src="https://ssl.p.jwpcdn.com/player/v/8.28.1/jwplayer.core.controls.js"></script>
+
   <link rel="stylesheet" href="style.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
   <!-- Top Navbar -->
@@ -24,11 +29,11 @@
 
   <!-- Main Content -->
   <div class="content">
-    <!-- Video Player Area -->
+    <!-- JW Player Container -->
     <div class="player-section">
-      <video id="videoPlayer" controls autoplay></video>
-      <h2 id="videoTitle"></h2>
-      <p id="videoDescription"></p>
+      <div id="videoPlayer"></div>
+      <h2 id="videoTitle">Sample Video</h2>
+      <p id="videoDescription">This is a test video description powered by JW Player.</p>
     </div>
 
     <!-- Sidebar Recommendations -->
